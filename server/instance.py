@@ -1,7 +1,6 @@
-from distutils.log import debug
 from flask import Flask, Blueprint
 from flask_restplus import Api
-
+import mysql.connector
 class Server():
   def __init__(self, ):
     self.app = Flask(__name__)
@@ -10,14 +9,9 @@ class Server():
 
     self.app.register_blueprint(self.blueprint)
 
-    self.app.config['SQLALCHEMI_DATABASE_URI'] = 'mysql/root'
+    self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://clenio:Cgm2703.@localhost/candlesticks'
     self.app.config['PROPAGATE_EXCEPTIONS'] = True
-    self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
-    self.candle_ns = self.candle_ns()
-
-  def candle_ns(self, ):
-    return self.api.namespace(name='Candles', description='candles related operations', path='/')
+    self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
   
   def run(self, ):
     self.app.run(

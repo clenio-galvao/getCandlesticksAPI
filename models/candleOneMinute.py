@@ -1,15 +1,14 @@
-from datetime import datetime
 from db import db
 
 class CandleOneMinuteModel(db.Model):
-  __tablename__ = 'candleoneminute'
+  __tablename__ = 'CandleOneMinute'
 
-  id = db.Column(db.integer, primary_hey=True)
-  datetime = db.Column(db.datetime, nullable=False)
-  open = db.Column(db.number, nullable=False)
-  low = db.Column(db.number, nullable=False)
-  high = db.Column(db.number, nullable=False)
-  close = db.Column(db.number, nullable=False)
+  id = db.Column(db.Integer, primary_key=True)
+  datetime = db.Column(db.Date, nullable=False)
+  open = db.Column(db.Float, nullable=False)
+  low = db.Column(db.Float, nullable=False)
+  high = db.Column(db.Float, nullable=False)
+  close = db.Column(db.Float, nullable=False)
 
   def __init__(self, datetime, open, low, high, close):
     self.datetime = datetime
@@ -17,9 +16,6 @@ class CandleOneMinuteModel(db.Model):
     self.low = low
     self.high = high
     self.close = close
-
-  def __repr__(self, ):
-    return f'CandleOneMinuteModel(datetime={self.datetime}'
 
   def json(self, ):
     return {
@@ -29,10 +25,6 @@ class CandleOneMinuteModel(db.Model):
       'high': self.high,
       'close': self.close
     }
-
-  @classmethod
-  def find_by_datetime(cls, datetime):
-    return cls.query.filter_by(datetime=datetime).first()
 
   @classmethod
   def find_all(cls):
