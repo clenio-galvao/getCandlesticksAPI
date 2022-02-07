@@ -1,6 +1,5 @@
 from flask import Flask, Blueprint
 from flask_restplus import Api
-import mysql.connector
 class Server():
   def __init__(self, ):
     self.app = Flask(__name__)
@@ -9,7 +8,7 @@ class Server():
 
     self.app.register_blueprint(self.blueprint)
 
-    self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://clenio:Cgm2703.@localhost/candlesticks'
+    self.app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://clenio:Cgm2703.@localhost/candlesticks'
     self.app.config['PROPAGATE_EXCEPTIONS'] = True
     self.app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
   
